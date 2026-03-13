@@ -1,17 +1,13 @@
 <script setup>
-//Asbestos data >:D :
-// https://data.cityofnewyork.us/api/v3/views/vq35-j9qm/query.json
-
 //Park Trails :D :
-// https://data.cityofnewyork.us/api/v3/views/vjbm-hsyr/query.json
+// https://data.cityofnewyork.us/resource/vjbm-hsyr.json
+
+//Air quality:
+//https://data.cityofnewyork.us/resource/c3uy-2p5r.json
 </script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  
 </template>
 
 <style scoped></style>
