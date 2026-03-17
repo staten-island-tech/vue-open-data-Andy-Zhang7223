@@ -11,7 +11,7 @@ const apidata = ref([])
 
 async function getdata() {
   try {
-    const api = await fetch('https://data.cityofnewyork.us/resource/c3uy-2p5r.json')
+    const api = await fetch('https://data.cityofnewyork.us/resource/p937-wjvj.json')
     const data = await api.json()
     apidata.value = data
   } catch (error) {

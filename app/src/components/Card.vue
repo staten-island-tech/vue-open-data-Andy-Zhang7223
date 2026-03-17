@@ -1,7 +1,7 @@
 <template>
   <div>
-    {{ data.unique_id }}
-    {{ data.name }}
+    {{ data.result }}
+    {{ data.location }}
   </div>
 </template>
 
