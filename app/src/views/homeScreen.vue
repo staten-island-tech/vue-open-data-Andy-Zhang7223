@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Card v-for="data in apidata" :key="data.name" :data="data"></Card>
+    <h1>Where To Find Your Best Friends!</h1>
+    <li>
+      <Card v-for="data in apidata" :key="data.name" :data="data"></Card>
+    </li>
   </div>
 </template>
 
@@ -18,6 +21,7 @@ async function getdata() {
     console.log(error)
   }
 }
+
 onMounted(() => {
   getdata()
 })

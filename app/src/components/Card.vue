@@ -1,7 +1,6 @@
 <template>
   <div>
-    {{ data.result }}
-    {{ data.location }}
+    {{ data.borough }}
   </div>
 </template>
 
