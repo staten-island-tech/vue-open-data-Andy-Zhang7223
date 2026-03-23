@@ -1,21 +1,16 @@
 <template>
-  <div></div>
+  <div>{{ apidata }}</div>
 </template>
 
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-//Park Trails :D :
-// https://data.cityofnewyork.us/resource/vjbm-hsyr.json
-
-//Air quality:
-//https://data.cityofnewyork.us/resource/c3uy-2p5r.json
 const apidata = ref([])
 const route = useRoute()
 
-async function getdata() {
+async function getdata(id) {
   try {
-    const api = await fetch('https://data.cityofnewyork.us/resource/p937-wjvj.json')
+    const api = await fetch(`https://data.cityofnewyork.us/resource/p937-wjvj.json/`)
     const data = await api.json()
     apidata.value = data
   } catch (error) {
@@ -26,7 +21,7 @@ async function getdata() {
 watch(
   () => route.params.id,
   function () {
-    getdata()
+    getdata(id)
   },
 )
 
