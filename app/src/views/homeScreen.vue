@@ -4,12 +4,16 @@
     <li>
       <Card v-for="data in apidata" :key="data.name" :data="data"></Card>
     </li>
+    <canvas id="myChart"></canvas>
   </div>
 </template>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script setup>
 import Card from '@/components/Card.vue'
 import { ref, onMounted } from 'vue'
+import { Chart } from 'chart.js'
 const apidata = ref([])
 
 async function getdata() {
@@ -24,6 +28,27 @@ async function getdata() {
 
 onMounted(() => {
   getdata()
+})
+
+const ctx = document.getElementById('myChart')
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: '',
+      data: [],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
 })
 </script>
 

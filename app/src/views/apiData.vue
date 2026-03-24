@@ -8,7 +8,7 @@ import { useRoute } from 'vue-router'
 const apidata = ref([])
 const route = useRoute()
 
-async function getdata(id) {
+async function getdata() {
   try {
     const api = await fetch(`https://data.cityofnewyork.us/resource/p937-wjvj.json/`)
     const data = await api.json()
@@ -21,7 +21,7 @@ async function getdata(id) {
 watch(
   () => route.params.id,
   function () {
-    getdata(id)
+    getdata()
   },
 )
 

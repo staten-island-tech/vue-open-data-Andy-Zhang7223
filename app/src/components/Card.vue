@@ -1,12 +1,12 @@
 <template>
   <router-link :to="Path" class="card">
     {{ data.job_id }}
-    <h2>{{ id }}</h2>
+    {{ data.location }}
   </router-link>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
 const props = defineProps({
   data: {
     type: Object,
