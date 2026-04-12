@@ -1,27 +1,17 @@
 <template>
-  <div>
-    <h1>Where To Find Your Best Friends!</h1>
-    <h2>This Website Will Show You Where it is Most Likely To Find Rats(Cuz Why Not)</h2>
     <div>
-      <Card v-for="Borough in Boroughs" :key="Borough" />
+        <Pie class="chart" id="my-chart-id" :options="chartOptions" :data="chartData" />
     </div>
-    <Pie class="chart" id="my-chart-id" :options="chartOptions" :data="chartData" />
-  </div>
 </template>
 
 <script setup>
-import Card from '@/components/Card.vue'
 import { ref, onMounted } from 'vue'
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 
 const apidata = ref([])
 
-const apidataBrooklyn = ref([])
-const apidataQueens = ref([])
-const apidataManhattan = ref([])
-const apidataBronx = ref([])
-const apidataStatenIsland = ref([])
+const apidataBorough = ref([])
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
@@ -29,8 +19,6 @@ let Passed = ref(0)
 let FailedforRatAct = ref(0)
 let FailedforOtherR = ref(0)
 let RatActivity = ref(0)
-
-let Boroughs = ref([])
 
 const chartData = ref({
   labels: ['Passed', 'Failed for Rat Act', 'Failed for Other R', 'Rat Activity'],
@@ -62,8 +50,7 @@ async function getdata() {
     const api = await fetch('https://data.cityofnewyork.us/resource/p937-wjvj.json')
     const data = await api.json()
     apidata.value = data
-    console.log([...new Set(apidata.value.map((i) => i.borough))])
-    Boroughs.value = [...new Set(apidata.value.map((i) => i.borough))]
+    console.log([...new Set(apidata.value.map((i) => i.result))])
 
     apidata.value.forEach((item) => {
       const result = item.result?.toLowerCase().replace(/\s+/g, '')
