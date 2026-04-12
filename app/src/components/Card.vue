@@ -1,11 +1,21 @@
 <template>
-  {{ Borough }}
+  <router-link :to="linkPath">
+    <h2>{{ Borough.name }}</h2>
+  </router-link>
 </template>
 
 <script setup>
-defineProps({
-  data: Object,
-  Boroughs: Array,
+import { computed } from 'vue'
+
+const props = defineProps({
+  Borough: {
+    type: Object,
+    required: true,
+  },
+})
+
+const linkPath = computed(() => {
+  return `/link/${props.Borough.name}`
 })
 </script>
 

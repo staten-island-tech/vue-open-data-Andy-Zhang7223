@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1>Where To Find Your Best Friends!</h1>
-    <h2>This Website Will Show You Where it is Most Likely To Find Rats(Cuz Why Not)</h2>
+    <h2>This Website Will Show You Where it is Most Likely To Find Rats In NYC(Cuz Why Not)</h2>
     <div>
-      <Card v-for="Borough in Boroughs" :key="Borough.name" :Boroughs="Borough.data"/>
+      <Card v-for="borough in Boroughs" :key="borough.name" :Borough="borough" />
     </div>
     <Pie class="chart" id="my-chart-id" :options="chartOptions" :data="chartData" />
   </div>
@@ -48,6 +48,7 @@ const chartOptions = {
         bottom: 10,
       },
     },
+    height: `${100}px`,
   },
 }
 
@@ -74,14 +75,14 @@ async function getdata() {
 
     Boroughs.value = test.map((b) => ({
       name: b,
-      data: apidata.value.filter((i) => i.borough === b)
+      data: apidata.value.filter((i) => i.borough === b),
     }))
 
     chartData.value = {
       labels: chartData.value.labels,
       datasets: [
         {
-          label: 'Counts',
+          label: '# of Results',
           data: [Passed.value, FailedforRatAct.value, FailedforOtherR.value, RatActivity.value],
           backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0'],
         },
