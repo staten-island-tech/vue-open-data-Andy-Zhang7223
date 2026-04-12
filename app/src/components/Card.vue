@@ -2,6 +2,11 @@
   {{ Borough }}
 </template>
 
-<script setup></script>
+<script setup>
+defineProps({
+  data: Object,
+  Boroughs: Array,
+})
+</script>
 
 <style scoped></style>

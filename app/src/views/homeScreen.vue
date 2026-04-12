@@ -3,7 +3,7 @@
     <h1>Where To Find Your Best Friends!</h1>
     <h2>This Website Will Show You Where it is Most Likely To Find Rats(Cuz Why Not)</h2>
     <div>
-      <Card v-for="Borough in Boroughs" :key="Borough" />
+      <Card v-for="Borough in Boroughs" :key="Borough.name" :Boroughs="Borough.data"/>
     </div>
     <Pie class="chart" id="my-chart-id" :options="chartOptions" :data="chartData" />
   </div>
@@ -16,12 +16,6 @@ import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 
 const apidata = ref([])
-
-const apidataBrooklyn = ref([])
-const apidataQueens = ref([])
-const apidataManhattan = ref([])
-const apidataBronx = ref([])
-const apidataStatenIsland = ref([])
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
@@ -62,8 +56,6 @@ async function getdata() {
     const api = await fetch('https://data.cityofnewyork.us/resource/p937-wjvj.json')
     const data = await api.json()
     apidata.value = data
-    console.log([...new Set(apidata.value.map((i) => i.borough))])
-    Boroughs.value = [...new Set(apidata.value.map((i) => i.borough))]
 
     apidata.value.forEach((item) => {
       const result = item.result?.toLowerCase().replace(/\s+/g, '')
@@ -78,14 +70,12 @@ async function getdata() {
       }
     })
 
-    apidata.value.forEach((item) => {
-      const borough = item.borough.toLowerCase()
-      if (borough === 'brooklyn') apidataBrooklyn.value.push(item)
-      else if (borough === 'queens') apidataQueens.value.push(item)
-      else if (borough === 'manhattan') apidataManhattan.value.push(item)
-      else if (borough === 'bronx') apidataBronx.value.push(item)
-      else apidataStatenIsland.value.push(item)
-    })
+    const test = [...new Set(apidata.value.map((i) => i.borough))]
+
+    Boroughs.value = test.map((b) => ({
+      name: b,
+      data: apidata.value.filter((i) => i.borough === b)
+    }))
 
     chartData.value = {
       labels: chartData.value.labels,
